@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "473437165434",
+    "project_id": "devtodo-c0c65",
+    "storage_bucket": "devtodo-c0c65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473437165434:android:e2628dc80ddc3a7a81a8c3",
+        "android_client_info": {
+          "package_name": "com.example.devtodo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473437165434-13d35vciqg72avfie94orkqa1jtt47da.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMnuOrfu7Y3G9JYmTF7y3ZXl9Mtr59irI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473437165434-13d35vciqg72avfie94orkqa1jtt47da.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
