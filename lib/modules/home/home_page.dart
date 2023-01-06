@@ -49,6 +49,11 @@ class _HomePageState extends State<HomePage> {
     print(tasks);
   }
 
+  Future<void> limparLista() async {
+    tasks.clear();
+    print(tasks);
+  }
+
   @override
   Widget build(BuildContext context) {
     var appBar = AppBar();
@@ -159,8 +164,11 @@ class _HomePageState extends State<HomePage> {
                               await firestore
                                   .collection("users/${widget.idUser}/tasks")
                                   .doc(idTask)
-                                  .set(
-                                      {"title": _task.text, "complete": false});
+                                  .set({
+                                "title": _task.text,
+                                "complete": false,
+                                "id": idTask
+                              });
                               _task.text = "";
                               tasks.clear();
                               Navigator.pop(context);
@@ -185,11 +193,17 @@ class _HomePageState extends State<HomePage> {
   Widget listarTasks() {
     return Column(
       children: tasks
-          .map<Widget>(
-              (e) => Assignment(idUser: widget.idUser, title: e["title"]))
+          .map<Widget>((e) => Assignment(
+                idUser: widget.idUser,
+                title: e["title"],
+                idTask: e["id"],
+                initA: initA,
+                limparLista: limparLista,
+                email: widget.email,
+                imgUrl: widget.imgUrl,
+                name: widget.name,
+              ))
           .toList(),
     );
-
-    //return Assignment(idUser: idUser, title: title);
   }
 }
