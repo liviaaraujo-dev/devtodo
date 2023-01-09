@@ -28,7 +28,9 @@ class MyThemes {
     colorScheme: const ColorScheme.dark(),
     iconTheme: IconThemeData(color: Colors.purple.shade200, opacity: 0.8),
     textTheme: GoogleFonts.interTextTheme().copyWith(
-      headline1: GoogleFonts.oswald(textStyle: TextStyle(fontSize: 18)),
+      headline1: GoogleFonts.inter(
+          textStyle: TextStyle(
+              fontSize: 32, fontWeight: FontWeight.w600, color: Colors.white)),
     ),
   );
 
@@ -39,7 +41,10 @@ class MyThemes {
     iconTheme: const IconThemeData(color: Colors.red, opacity: 0.8),
     textTheme: GoogleFonts.interTextTheme().copyWith(
         headline1: GoogleFonts.inter(
-            textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+            textStyle: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.w600,
+                color: Color(0xfff585666))),
         headline2: GoogleFonts.lexendDeca(
           fontSize: 20,
           fontWeight: FontWeight.w400,
@@ -58,7 +63,7 @@ class MyThemes {
             textStyle: TextStyle(
                 color: AppColors.text,
                 fontSize: 16,
-                fontWeight: FontWeight.w400))),
+                fontWeight: FontWeight.w500))),
   );
 
   // static const lightTextTheme = TextTheme(

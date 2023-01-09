@@ -38,15 +38,21 @@ class _LoginPageState extends State<LoginPage> {
             top: 55,
           ),
           Positioned(
-            top: size.height * 0.52,
+            top: size.height * 0.51,
             left: 0,
             right: 0,
             child: Column(children: [
               Image.asset(AppImages.logo),
+              SizedBox(
+                height: size.height * 0.02,
+              ),
               Text(
-                "Organize suas tarefas",
+                "Organize suas\ntarefas",
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headline1,
+              ),
+              SizedBox(
+                height: size.height * 0.08,
               ),
               LoginGoogleButton(
                 onTap: () {
