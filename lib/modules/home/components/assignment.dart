@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devtodo/modules/home/home_page.dart';
 import 'package:devtodo/modules/splash/splash_page.dart';
@@ -8,21 +10,19 @@ class Assignment extends StatefulWidget {
   final String idUser;
   final String title;
   final String idTask;
-  final VoidCallback initA;
   final String email;
+  final bool complete;
   final String name;
   final String imgUrl;
-  final VoidCallback limparLista;
   const Assignment(
       {super.key,
       required this.idUser,
       required this.title,
       required this.idTask,
-      required this.initA,
-      required this.limparLista,
       required this.email,
       required this.name,
-      required this.imgUrl});
+      required this.imgUrl,
+      required this.complete});
 
   @override
   State<Assignment> createState() => _AssignmentState();
@@ -35,6 +35,15 @@ class _AssignmentState extends State<Assignment> {
   bool deletar = false;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    setState(() {
+      isChecked = widget.complete;
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,9 +54,17 @@ class _AssignmentState extends State<Assignment> {
               checkColor: Colors.white,
               value: isChecked,
               activeColor: AppColors.laranja,
-              onChanged: (bool? value) {
+              onChanged: (bool? value) async {
                 setState(() {
                   isChecked = value!;
+                });
+                await firestore
+                    .collection("users/${widget.idUser}/tasks")
+                    .doc(widget.idTask)
+                    .set({
+                  "title": widget.title,
+                  "complete": isChecked,
+                  "id": widget.idTask
                 });
               },
             ),
@@ -120,9 +137,6 @@ class _AssignmentState extends State<Assignment> {
                       );
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => SplashPage()));
-                  // widget.limparLista();
-                  // widget.initA();
-                  // setState(() {});
                 }
               },
             ),
