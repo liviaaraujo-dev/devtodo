@@ -26,19 +26,30 @@ class MyThemes {
     scaffoldBackgroundColor: Colors.black,
     primaryColor: Colors.black,
     colorScheme: const ColorScheme.dark(),
-    iconTheme: IconThemeData(color: Colors.purple.shade200, opacity: 0.8),
+    iconTheme: IconThemeData(color: Colors.white, opacity: 0.8),
     textTheme: GoogleFonts.interTextTheme().copyWith(
       headline1: GoogleFonts.inter(
           textStyle: TextStyle(
               fontSize: 32, fontWeight: FontWeight.w600, color: Colors.white)),
+      headline2: GoogleFonts.lexendDeca(
+        fontSize: 20,
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+      ),
+      headline3: GoogleFonts.inter(
+          fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
+      bodyText2: GoogleFonts.inter(
+          color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600),
+      bodyText1: GoogleFonts.inter(color: Color(0xFFFAFAFC), fontSize: 13),
     ),
   );
 
   static final lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.white,
     primaryColor: Colors.white,
+    focusColor: AppColors.laranja,
     colorScheme: const ColorScheme.light(),
-    iconTheme: const IconThemeData(color: Colors.red, opacity: 0.8),
+    iconTheme: const IconThemeData(color: Colors.black, opacity: 0.8),
     textTheme: GoogleFonts.interTextTheme().copyWith(
         headline1: GoogleFonts.inter(
             textStyle: TextStyle(

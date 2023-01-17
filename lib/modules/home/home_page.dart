@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:devtodo/modules/home/components/assignment.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:uuid/uuid.dart';
 import '../../shared/theme/app_colors.dart';
 
@@ -97,8 +98,12 @@ class _HomePageState extends State<HomePage> {
           width: size.width * .85,
           child: Column(
             children: [
+              SizedBox(
+                height: 20,
+              ),
               Container(
                 alignment: Alignment.topLeft,
+                margin: const EdgeInsets.only(left: 10),
                 child: Text(
                   "Minhas Tarefas",
                   textAlign: TextAlign.left,
@@ -106,42 +111,21 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Container(
+                margin: const EdgeInsets.only(left: 10, top: 5),
                 height: 2,
                 width: size.width * .85,
                 color: Color(0xFFE3E3E5),
               ),
+              SizedBox(
+                height: 25,
+              ),
               listarTasks()
-              //  Builder(builder: BuildContext (context) {
-              //    tasks.map(
-              //       (e) => {Assignment(idUser: widget.idUser, title: e["title"])},
-              //     );
-              //  })
-              //listarTasks()
-              // Assignment(
-              //   idUser: widget.idUser,
-              //   title: ,
-              // )
             ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // String idTask = Uuid().v1();
-          // firestore
-          //     .collection("users/${widget.idUser}/tasks")
-          //     .doc(idTask)
-          //     .set({"title": "estudar dart", "complete": true});
-
-          // FirebaseFirestore.instance
-          //     .collection('users/${widget.idUser}/tasks')
-          //     .get()
-          //     .then((QuerySnapshot querySnapshot) {
-          //   querySnapshot.docs.forEach((doc) {
-          //     print(doc.data());
-          //   });
-          // });
-
           showDialog(
               context: context,
               builder: (BuildContext conttext) {
@@ -150,14 +134,35 @@ class _HomePageState extends State<HomePage> {
                     height: screenHeight * .3,
                     child: Column(
                       children: [
-                        Text(
-                          "Nova tarefa",
-                          style: Theme.of(context).textTheme.headline3,
+                        Container(
+                          margin: EdgeInsets.only(top: 15),
+                          child: Text(
+                            "Nova tarefa",
+                            style: Theme.of(context).textTheme.headline3,
+                          ),
                         ),
-                        TextField(
-                          controller: _task,
-                        ),
+                        Container(
+                            margin: EdgeInsets.only(top: 30, bottom: 20),
+                            padding: EdgeInsets.only(left: 10, right: 10),
+                            //width: size.width * 0.5,
+                            child: TextFormField(
+                              textCapitalization: TextCapitalization.words,
+                              autofocus: true,
+                              controller: _task,
+                              decoration: InputDecoration(
+                                hintText: "Nome Completo",
+                                enabledBorder: InputBorder.none,
+                                contentPadding: EdgeInsetsDirectional.only(
+                                    start: 20, top: 15, bottom: 15),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide.none),
+                              ),
+                            )),
                         ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.only(
+                                    left: 30, right: 30, top: 10, bottom: 10),
+                                backgroundColor: AppColors.laranja),
                             onPressed: () async {
                               print(_task.text);
                               String idTask = await Uuid().v1();
@@ -174,7 +179,12 @@ class _HomePageState extends State<HomePage> {
                               Navigator.pop(context);
                               await initA();
                             },
-                            child: Text("Adicionar"))
+                            child: Text(
+                              "ADICIONAR",
+                              style: GoogleFonts.inter(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            ))
                       ],
                     ),
                   ),
