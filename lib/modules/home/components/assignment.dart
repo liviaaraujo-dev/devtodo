@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:devtodo/modules/home/home_page.dart';
 import 'package:devtodo/modules/splash/splash_page.dart';
 import 'package:devtodo/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -32,11 +29,10 @@ class Assignment extends StatefulWidget {
 class _AssignmentState extends State<Assignment> {
   bool isChecked = false;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  TextEditingController _task = new TextEditingController();
+  final TextEditingController _task = TextEditingController();
 
   @override
   void initState() {
-    // TODO: implement initState
     setState(() {
       isChecked = widget.complete;
     });
@@ -81,7 +77,7 @@ class _AssignmentState extends State<Assignment> {
         Row(
           children: [
             GestureDetector(
-              child: Icon(
+              child: const Icon(
                 Icons.delete,
                 size: 26,
                 color: Colors.red,
@@ -111,7 +107,7 @@ class _AssignmentState extends State<Assignment> {
                                 children: [
                                   ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                          padding: EdgeInsets.only(
+                                          padding: const EdgeInsets.only(
                                               left: 30, right: 30),
                                           backgroundColor: AppColors.laranja),
                                       onPressed: () async {
@@ -129,7 +125,7 @@ class _AssignmentState extends State<Assignment> {
                                         Navigator.of(context).pushReplacement(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    SplashPage()));
+                                                    const SplashPage()));
                                       },
                                       child: Text(
                                         "SIM",
@@ -137,12 +133,12 @@ class _AssignmentState extends State<Assignment> {
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500),
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 20,
                                   ),
                                   ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                          padding: EdgeInsets.only(
+                                          padding: const EdgeInsets.only(
                                               left: 30, right: 30),
                                           backgroundColor: AppColors.laranja),
                                       onPressed: () async {

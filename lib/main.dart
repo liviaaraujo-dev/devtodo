@@ -1,4 +1,3 @@
-import 'package:devtodo/modules/login/login_page.dart';
 import 'package:devtodo/modules/splash/splash_page.dart';
 import 'package:devtodo/shared/provider/theme_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,13 +13,14 @@ Future main() async {
     DeviceOrientation.portraitDown,
   ]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  print('conectado');
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   static const String title = 'Light & Dark Theme';
+
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
             themeMode: themeProvider.themeMode,
             theme: MyThemes.lightTheme,
             darkTheme: MyThemes.darkTheme,
-            home: SplashPage(),
+            home: const SplashPage(),
           );
         },
       );

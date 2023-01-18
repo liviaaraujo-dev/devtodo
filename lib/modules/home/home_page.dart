@@ -11,7 +11,8 @@ class HomePage extends StatefulWidget {
   final String imgUrl;
   final String idUser;
   const HomePage(
-      {required this.email,
+      {super.key,
+      required this.email,
       required this.imgUrl,
       required this.name,
       required this.idUser});
@@ -24,35 +25,31 @@ class _HomePageState extends State<HomePage> {
   var nomeSeparado = [];
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  TextEditingController _task = new TextEditingController();
+  final TextEditingController _task = TextEditingController();
   List<dynamic> tasks = [];
 
   @override
   void initState() {
-    // TODO: implement initState
     nomeSeparado = widget.name.split(' ');
-    initA();
+    readTasks();
     super.initState();
   }
 
-  Future<void> initA() async {
+  Future<void> readTasks() async {
     await FirebaseFirestore.instance
         .collection('users/${widget.idUser}/tasks')
         .get()
         .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        print(doc.data());
+      for (var doc in querySnapshot.docs) {
         setState(() {
           tasks.add(doc.data());
         });
-      });
+      }
     });
-    print(tasks);
   }
 
-  Future<void> limparLista() async {
+  Future<void> cleanListTasks() async {
     tasks.clear();
-    print(tasks);
   }
 
   @override
@@ -63,23 +60,27 @@ class _HomePageState extends State<HomePage> {
         MediaQuery.of(context).padding.top;
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(152),
+        preferredSize: const Size.fromHeight(80),
         child: Container(
-          height: 152,
+          height: 180,
           color: AppColors.laranja,
           child: Center(
             child: ListTile(
-              title: Text.rich(
-                TextSpan(
-                    text: "Olá, ",
-                    style: Theme.of(context).textTheme.headline2,
-                    children: [TextSpan(text: nomeSeparado[0])]),
+              title: Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: Text.rich(
+                  TextSpan(
+                      text: "Olá, ",
+                      style: Theme.of(context).textTheme.headline2,
+                      children: [TextSpan(text: nomeSeparado[0])]),
+                ),
               ),
               subtitle: Text(
                 "Mantenha suas tarefas em dia",
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               trailing: Container(
+                margin: const EdgeInsets.only(top: 10),
                 height: 48,
                 width: 48,
                 child: Image.network(widget.imgUrl),
@@ -98,7 +99,7 @@ class _HomePageState extends State<HomePage> {
           width: size.width * .85,
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -116,10 +117,10 @@ class _HomePageState extends State<HomePage> {
                 width: size.width * .85,
                 color: Color(0xFFE3E3E5),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
-              listarTasks()
+              _listTasksWidget()
             ],
           ),
         ),
@@ -131,7 +132,7 @@ class _HomePageState extends State<HomePage> {
               builder: (BuildContext conttext) {
                 return Dialog(
                   child: Container(
-                    height: screenHeight * .3,
+                    height: screenHeight * .35,
                     child: Column(
                       children: [
                         Container(
@@ -142,14 +143,13 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Container(
-                            margin: EdgeInsets.only(top: 30, bottom: 20),
-                            padding: EdgeInsets.only(left: 10, right: 10),
-                            //width: size.width * 0.5,
+                            margin: const EdgeInsets.only(top: 30, bottom: 20),
+                            padding: const EdgeInsets.only(left: 10, right: 10),
                             child: TextFormField(
                               textCapitalization: TextCapitalization.words,
                               autofocus: true,
                               controller: _task,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 hintText: "Nome Completo",
                                 enabledBorder: InputBorder.none,
                                 contentPadding: EdgeInsetsDirectional.only(
@@ -159,32 +159,32 @@ class _HomePageState extends State<HomePage> {
                               ),
                             )),
                         ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                padding: EdgeInsets.only(
-                                    left: 30, right: 30, top: 10, bottom: 10),
-                                backgroundColor: AppColors.laranja),
-                            onPressed: () async {
-                              print(_task.text);
-                              String idTask = await Uuid().v1();
-                              await firestore
-                                  .collection("users/${widget.idUser}/tasks")
-                                  .doc(idTask)
-                                  .set({
-                                "title": _task.text,
-                                "complete": false,
-                                "id": idTask
-                              });
-                              _task.text = "";
-                              tasks.clear();
-                              Navigator.pop(context);
-                              await initA();
-                            },
-                            child: Text(
-                              "ADICIONAR",
-                              style: GoogleFonts.inter(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500),
-                            ))
+                          child: Text(
+                            "ADICIONAR",
+                            style: GoogleFonts.inter(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.only(
+                                  left: 30, right: 30, top: 10, bottom: 10),
+                              backgroundColor: AppColors.laranja),
+                          onPressed: () async {
+                            String idTask = await Uuid().v1();
+                            await firestore
+                                .collection("users/${widget.idUser}/tasks")
+                                .doc(idTask)
+                                .set({
+                              "title": _task.text,
+                              "complete": false,
+                              "id": idTask
+                            });
+                            _task.text = "";
+                            tasks.clear();
+                            Navigator.pop(context);
+                            await readTasks();
+                          },
+                        )
                       ],
                     ),
                   ),
@@ -192,7 +192,7 @@ class _HomePageState extends State<HomePage> {
               });
         },
         backgroundColor: AppColors.laranja,
-        child: Icon(
+        child: const Icon(
           Icons.add_rounded,
           color: Colors.white,
         ),
@@ -200,7 +200,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget listarTasks() {
+  Widget _listTasksWidget() {
     return Column(
       children: tasks
           .map<Widget>((e) => Assignment(

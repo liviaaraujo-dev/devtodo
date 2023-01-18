@@ -76,18 +76,4 @@ class MyThemes {
                 fontSize: 16,
                 fontWeight: FontWeight.w500))),
   );
-
-  // static const lightTextTheme = TextTheme(
-  //   headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-  // );
-
-  // static const darkTextTheme = TextTheme(
-  //   headline1: GoogleFonts.inter(),
-  // );
-
-  // static const lightTextTheme = GoogleFonts.latoTextTheme(textTheme).copyWith(
-  //   body1: GoogleFonts.oswald(textStyle: textTheme.body1),
-  // );
-
-  //Theme.of(context).textTheme.headline1
 }
