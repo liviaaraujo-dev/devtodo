@@ -1,6 +1,6 @@
 # devtodo
 
-A new Flutter project.
+Aplicativo de Listas de Tarefas desenvolvido em flutter
 
 ## Getting Started
 
