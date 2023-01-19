@@ -1,6 +1,8 @@
-# devtodo
+# Dev Todo
 
-Aplicativo de Listas de Tarefas desenvolvido em flutter
+Aplicativo de Listas de Tarefas desenvolvido em flutter<br>
+
+![GitHub Logo](print.jpg)
 
 ## Getting Started
 
