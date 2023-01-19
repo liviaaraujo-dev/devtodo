@@ -5,6 +5,15 @@ Aplicativo de Listas de Tarefas desenvolvido em flutter<br><br>
 ### APK APP
 <https://github.com/liviatec/devtodo/blob/main/devtodo-app-apk.apk/><br><br>
 
+## Tecnologias
+
+Esse projeto foi desenvolvido com as seguintes tecnologias:
+
+- Dart
+- Flutter
+- Firebase
+- Firestore<br><br>
+
 ![GitHub Logo](print.jpg)
 
 ## Getting Started
